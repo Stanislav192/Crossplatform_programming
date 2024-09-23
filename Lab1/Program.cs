@@ -59,18 +59,40 @@ namespace Lab1
             }
         }
 
-
-
         public static void Main(string[] args)
         {
+            try
+            {
+                string inputFile = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "Lab1", "INPUT.txt").Trim();
 
-            string a = "AB";
+                if (!File.Exists(inputFile))
+                {
+                    Console.WriteLine($"File {inputFile} wasn't found");
+                    return;
+                }
 
 
-            StringBuilder ress = new StringBuilder();
-            Rearrange(a,0,ress);
+                string inputStr = File.ReadAllText(inputFile);
 
-            Console.WriteLine(ress.ToString());
+                if (string.IsNullOrEmpty(inputStr))
+                {
+                    Console.WriteLine("Error.String cannot be empty");
+                    return;
+                }
+
+                StringBuilder result = new StringBuilder();
+
+                Rearrange(inputStr, 0, result);
+
+                File.WriteAllText(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "Lab1", "OUTPUT.txt"), result.ToString().Trim());
+
+                Console.WriteLine($"The results are recorded in OUTPUT.TXT");
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Unknown error: {ex.Message}");
+            }
 
         }
     }
