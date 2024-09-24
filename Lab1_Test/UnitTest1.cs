@@ -33,7 +33,7 @@ namespace Lab1_Test
         {
             StringBuilder result = new StringBuilder();
             string input = "AB";
-            string expected = "AB\r\nBA\r\n";
+            string expected = "AB" + Environment.NewLine + "BA" + Environment.NewLine;
 
             Program.Rearrange(input, 0, result);
 
@@ -46,9 +46,10 @@ namespace Lab1_Test
             StringBuilder result = new StringBuilder();
             string input = "X";
 
+            string expected = "X" + Environment.NewLine;
             Program.Rearrange(input, 0, result);
 
-            Assert.Equal("X\r\n", result.ToString());
+            Assert.Equal(expected, result.ToString());
         }
 
         [Fact]
