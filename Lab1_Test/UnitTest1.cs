@@ -113,32 +113,31 @@ namespace Lab1_Test
 
 
         [Fact]
-        public void TestFileReadAndWrite()
+        public void Rearrange_RepeatedCharactersString()
         {
-            string inputFile = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "Lab1", "INPUT.txt").Trim();
-            string outputFile = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "Lab1", "OUTPUT.txt");
+            string input = "AAB";
+            StringBuilder result = new StringBuilder();
+            string expectedOutput = "AAB" + Environment.NewLine + "ABA" + Environment.NewLine +
+                                    "AAB" + Environment.NewLine + "ABA" + Environment.NewLine +
+                                    "BAA" + Environment.NewLine + "BAA" + Environment.NewLine;
 
-            Console.WriteLine("Writing 'ABC' to input file: " + inputFile);
-            File.WriteAllText(inputFile, "ABC");
+            Console.WriteLine("Rearrange method: Test string with repeated characters " + input);
+            Console.WriteLine("Expected output:");
+            Console.WriteLine(expectedOutput);
 
-            Console.WriteLine("Calling Program.Main()...");
-            Program.Main(new string[] { });
+            Program.Rearrange(input, 0, result);
+            
+            Assert.Equal(expectedOutput, result.ToString());
 
-            string output = File.ReadAllText(outputFile).Trim();
-            Console.WriteLine("Output from output file: " + output);
-
-            string[] expectedOutputs = { "ABC", "ACB", "BAC", "BCA", "CAB", "CBA" };
-            foreach (var expected in expectedOutputs)
+            if (result.ToString() == expectedOutput)
             {
-                Console.WriteLine($"Checking if output contains {expected}...");
-                Assert.Contains(expected, output);
+                Console.WriteLine("Test passed");
             }
-
-            Console.WriteLine("All permutations are found in the output. Test passed!");
-
-            Console.WriteLine("Deleting input and output files...");
-            File.Delete(inputFile);
-            File.Delete(outputFile);
+            else
+            {
+                Console.WriteLine("Test failed");
+            }
+            Console.WriteLine();
         }
 
     }
