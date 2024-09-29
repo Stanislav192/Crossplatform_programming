@@ -21,7 +21,38 @@
 
         public static void Main(string[] args)
         {
-            Console.WriteLine(Count_Strings(3));
+            string inputFile = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "Lab2", "INPUT.txt").Trim();
+            
+            if (!File.Exists(inputFile))
+            {
+                Console.WriteLine("Input file doesn't exist.");
+                return;
+            }
+
+            string inputContent = File.ReadAllText(inputFile).Trim();
+
+            if (string.IsNullOrEmpty(inputContent))
+            {
+                Console.WriteLine("Input file is empty."); 
+                return;
+            }
+
+            if (!int.TryParse(inputContent, out int N))
+            {
+                Console.WriteLine("Invalid input format.");
+                return;
+            }
+
+            if (N < 1 || N > 1000)
+            {
+                Console.WriteLine("Input out of range.");
+                return;
+            }
+
+            int result = Count_Strings(N);
+
+            File.WriteAllText(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "Lab2", "OUTPUT.txt"), result.ToString().Trim());
+            Console.WriteLine($"The results are recorded in OUTPUT.TXT");
         }
     }
 }
