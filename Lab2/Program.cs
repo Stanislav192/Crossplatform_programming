@@ -2,9 +2,15 @@
 {
     public class Program
     {
-        static int Count_Strings(int n)
+        public static int Count_Strings(int n)
         {
-           int[] a = new int[n]; 
+            if (n < 1 || n > 1000)
+            {
+                Console.WriteLine("Input out of range.");
+                return 0;
+            }
+
+            int[] a = new int[n]; 
 
             int[] b = new int[n];
 
@@ -43,16 +49,10 @@
                 return;
             }
 
-            if (N < 1 || N > 1000)
-            {
-                Console.WriteLine("Input out of range.");
-                return;
-            }
-
             int result = Count_Strings(N);
 
             File.WriteAllText(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "Lab2", "OUTPUT.txt"), result.ToString().Trim());
-            Console.WriteLine($"The results are recorded in OUTPUT.TXT");
+            Console.WriteLine($"The Result are recorded in OUTPUT.TXT");
         }
     }
 }
