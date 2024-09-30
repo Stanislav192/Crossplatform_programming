@@ -80,6 +80,12 @@ namespace Lab1
                     return;
                 }
 
+                if (!IsStringOnlyLetters(inputStr))
+                {
+                    Console.WriteLine("Error. The input must contain only letters.");
+                    return;
+                }
+
                 StringBuilder result = new StringBuilder();
 
                 Rearrange(inputStr, 0, result);
@@ -93,7 +99,10 @@ namespace Lab1
             {
                 Console.WriteLine($"Unknown error: {ex.Message}");
             }
-
+        }
+        public static bool IsStringOnlyLetters(string str)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(str, @"^[a-zA-Z]+$");
         }
     }
 }
