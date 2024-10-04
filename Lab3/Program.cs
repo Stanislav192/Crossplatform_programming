@@ -1,6 +1,6 @@
 ﻿namespace Lab3
 {
-    class State
+public class State
     {
         public char[,] a = new char[2, 4];
 
@@ -92,7 +92,7 @@
         }
     }
 
-    class Program
+    public class Program
     {
         static void Main()
         {
