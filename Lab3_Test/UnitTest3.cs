@@ -17,7 +17,7 @@ namespace Lab3_Test
 
             Assert.Equal(expected, result);
 
-            if (expected == result)
+            if (Convert.ToString(expected) == Convert.ToString(result))
             {
                 Console.WriteLine("Test is passed.");
             }
@@ -38,7 +38,8 @@ namespace Lab3_Test
             State copy = original.DeepCopy();
 
             Assert.Equal(original, copy);
-            if (copy == original)
+
+            if (Convert.ToString(copy) == Convert.ToString(original))
             {
                 Console.WriteLine("Test is passed.");
             }
