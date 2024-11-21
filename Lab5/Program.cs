@@ -1,3 +1,4 @@
+using Auth0.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Lab5
@@ -9,6 +10,24 @@ namespace Lab5
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllersWithViews();
+
+
+            builder.Services.AddAuth0WebAppAuthentication(options => {
+                options.Domain = builder.Configuration["Auth0:Domain"];
+                options.ClientId = builder.Configuration["Auth0:ClientId"];
+                options.ClientSecret = builder.Configuration["Auth0:ClientSecret"];
+
+                options.CallbackPath = "/signin-auth0";
+
+                options.OpenIdConnectEvents = new Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectEvents
+                {
+                    OnRedirectToIdentityProvider = context =>
+                    {
+                        context.ProtocolMessage.ResponseMode = "form_post";
+                        return Task.CompletedTask;
+                    }
+                };
+            });
 
             builder.Services.ConfigureApplicationCookie(options => {
                 options.Cookie.HttpOnly = true;
@@ -35,20 +54,21 @@ namespace Lab5
             {
                 ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) =>
                 {
-                    return true; 
+                    return true;
                 }
             });
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
+                
                 app.UseHsts();
             }
 
             app.UseAuthentication();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

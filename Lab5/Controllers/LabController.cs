@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ClassLibrary_Lab5;
 using ClassLibrary_Lab4;
 
@@ -6,12 +7,14 @@ namespace Lab5.Controllers
 {
     public class LabController : Controller
     {
+        [Authorize]
         public IActionResult Lab1Proj()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Lab1Result(string userInput)
         {
             try
@@ -40,12 +43,14 @@ namespace Lab5.Controllers
             return View("Lab1Proj");
         }
 
+        [Authorize]
         public IActionResult Lab2Proj()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Lab2Result(string userInput)
         {
             try
@@ -83,12 +88,14 @@ namespace Lab5.Controllers
             return View("Lab2Proj");
         }
 
+        [Authorize]
         public IActionResult Lab3Proj()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Lab3Result(string userInput)
         {
             try

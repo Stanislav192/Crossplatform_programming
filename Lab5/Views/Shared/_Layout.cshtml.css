@@ -5,7 +5,8 @@
 }
 
 header {
-    background-color: violet; 
+    background-color: violet;
+    z-index: 1000;
 }
 
 .navbar {
