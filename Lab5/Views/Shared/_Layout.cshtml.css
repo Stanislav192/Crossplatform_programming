@@ -1,0 +1,70 @@
+﻿a.navbar-brand {
+    white-space: normal;
+    text-align: left; 
+    word-break: keep-all; 
+}
+
+header {
+    background-color: violet;
+    z-index: 1000;
+}
+
+.navbar {
+    background-color: violet; 
+}
+
+main {
+    background-color: #f0f0f0; 
+    padding: 20px; 
+}
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: left;
+    word-break: keep-all;
+}
+
+a {
+    color: #4a90e2;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #2d8ee5;
+    border-color: #2171b5;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #2d8ee5;
+    border-color: #2171b5;
+}
+
+.border-top {
+    border-top: 1px solid #d6d6d6;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #d6d6d6;
+}
+
+.box-shadow {
+    box-shadow: 0 .35rem .85rem rgba(0, 0, 0, .1);
+}
+
+
+button.accept-policy {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 80px;
+    background-color: #f7f7f7;
+    border-top: 2px solid #d0d0d0;
+}
