@@ -19,7 +19,7 @@ end
 def configure_ubuntu(vm)
   vm.vm.box = "bento/ubuntu-22.04"
   vm.vm.hostname = "VMUbuntu"
-  vm.vm.network "forwarded_port", guest: 7435, host: 7435
+  vm.vm.network "forwarded_port", guest: 7258, host: 7258
   vm.vm.network "private_network", ip: "192.168.43.24"
   
   vm.vm.provider "virtualbox" do |vb|

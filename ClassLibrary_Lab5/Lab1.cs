@@ -4,44 +4,27 @@ namespace ClassLibrary_Lab5
 {
     public class Lab1
     {
-        public static void GoLab1(string inputFile, string outputFile)
+        public static string GoLab1(string input)
         {
             try
             {
-                // Читаємо вхідні дані
-                string input = ReadInputData(inputFile);
-
                 // Перевіряємо валідність вхідного рядка
-                IsStringOnlyLetters(input);
+                if (!IsStringOnlyLetters(input))
+                {
+                    throw new ArgumentException("Input contains non-letter characters.");
+                }
 
                 // Генеруємо всі можливі перестановки
                 StringBuilder permutationsResult = new StringBuilder();
                 Rearrange(input, 0, permutationsResult);
 
-                // Записуємо результати у файл
-                File.WriteAllText(outputFile, permutationsResult.ToString().Trim());
-
-                Console.WriteLine($"Results have been successfully saved to {outputFile}");
+                // Повертаємо результат як рядок
+                return permutationsResult.ToString().Trim();
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"An error occurred: {ex.Message}");
+                return $"An error occurred: {ex.Message}";
             }
-        }
-
-        private static string ReadInputData(string inputFile)
-        {
-            if (!File.Exists(inputFile))
-            {
-                throw new FileNotFoundException($"Input file not found: {inputFile}");
-            }
-
-            string input = File.ReadAllText(inputFile).Trim();
-            if (string.IsNullOrEmpty(input))
-            {
-                throw new ArgumentNullException("Input string cannot be empty or null.");
-            }
-            return input;
         }
 
         public static bool IsStringOnlyLetters(string str)
@@ -51,10 +34,9 @@ namespace ClassLibrary_Lab5
 
         public static void Rearrange(string text, int indx, StringBuilder ress)
         {
-
             if (indx < 0 || indx >= text.Length)
             {
-                Console.WriteLine("The index is not within acceptable limits");
+                throw new ArgumentOutOfRangeException("The index is not within acceptable limits");
             }
 
             if (indx == text.Length - 1)
@@ -65,14 +47,12 @@ namespace ClassLibrary_Lab5
 
             for (int i = indx; i < text.Length; i++)
             {
-
                 text = Swap(text, indx, i);
 
                 Rearrange(text, indx + 1, ress);
 
-                //Повертаємо рядок до попереднього стану
+                // Повертаємо рядок до попереднього стану
                 text = Swap(text, indx, i);
-
             }
         }
 
@@ -80,7 +60,7 @@ namespace ClassLibrary_Lab5
         {
             try
             {
-                //Перевірка, чи наші індекси в межах допустимого діапазону
+                // Перевірка, чи наші індекси в межах допустимого діапазону
                 if (i < 0 || j < 0 || i >= a.Length || j >= a.Length)
                 {
                     throw new IndexOutOfRangeException("Indexes should be within the length of the string.");
@@ -96,7 +76,6 @@ namespace ClassLibrary_Lab5
 
                 return new string(charArr);
             }
-
             catch (Exception ex)
             {
                 Console.WriteLine($"Unknown Error: {ex.Message}");

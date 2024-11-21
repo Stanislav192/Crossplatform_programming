@@ -1,76 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ClassLibrary_Lab5
+﻿namespace ClassLibrary_Lab5
 {
     public class Lab2
     {
-        public static void GoLab2(string inputFile, string outputFile)
+        public static string GoLab2(string userInput)
         {
             try
             {
-                // Перевірка наявності вхідного файлу
-                if (!File.Exists(inputFile))
+                // Перевірка, чи введено числове значення
+                if (!int.TryParse(userInput, out int n) || n < 1)
                 {
-                    Console.WriteLine("Input file doesn't exist.");
-                    return;
-                }
-
-                // Зчитування вхідних даних
-                string inputContent = File.ReadAllText(inputFile).Trim();
-
-                if (string.IsNullOrEmpty(inputContent))
-                {
-                    Console.WriteLine("Input file is empty.");
-                    return;
-                }
-
-                // Перетворення вхідного значення на ціле число
-                if (!int.TryParse(inputContent, out int n))
-                {
-                    Console.WriteLine("Invalid input format.");
-                    return;
+                    return "Invalid input. Please enter a positive integer.";
                 }
 
                 // Виклик основної функції для обчислення
                 int result = CountStrings(n);
 
-                // Запис результату у вихідний файл
-                File.WriteAllText(outputFile, result.ToString().Trim());
-                Console.WriteLine($"The result is recorded in {outputFile}");
+                return $"The number of valid strings for N = {n} is {result}.";
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
+                return "An error occurred: " + ex.Message;
             }
         }
 
-        private static int CountStrings(int n)
+        public static int CountStrings(int n)
         {
             if (n < 1 || n > 1000)
             {
-                Console.WriteLine("Input out of range.");
                 return 0;
             }
 
-            // Масиви для збереження кількості рядків
-            int[] a = new int[n];
-            int[] b = new int[n];
+            int[] dp = new int[n + 1];
 
-            // Початкові значення
-            a[0] = b[0] = 1;
+            dp[0] = 1; 
+            dp[1] = 2; 
 
-            // Заповнення масивів за рекурентною формулою
-            for (int i = 1; i < n; i++)
+
+            for (int i = 2; i <= n; i++)
             {
-                a[i] = (a[i - 1] + b[i - 1]) % 1000000007;
-                b[i] = a[i - 1];
+                dp[i] = dp[i - 1] + dp[i - 2];
             }
 
-            return (a[n - 1] + b[n - 1]) % 1000000007;
+            return dp[n];
         }
     }
 }

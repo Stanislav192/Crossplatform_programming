@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ClassLibrary_Lab5
+﻿namespace ClassLibrary_Lab4
 {
     public class Lab3
     {
@@ -12,11 +6,9 @@ namespace ClassLibrary_Lab5
         {
             try
             {
-                // Перевірка наявності файлу
                 if (!File.Exists(inputFile))
                     throw new FileNotFoundException($"Input file not found: {inputFile}");
 
-                // Читання вхідних даних
                 string[] lines = File.ReadAllLines(inputFile);
 
                 if (lines.Length < 4)
@@ -26,10 +18,8 @@ namespace ClassLibrary_Lab5
                 State start = State.Read(lines, 0);
                 State finish = State.Read(lines, 2);
 
-                // Запуск алгоритму BFS
                 int result = FindShortestPath(start, finish);
 
-                // Запис результату у вихідний файл
                 File.WriteAllText(outputFile, result.ToString());
                 Console.WriteLine("Result written to output file.");
             }
@@ -57,7 +47,6 @@ namespace ClassLibrary_Lab5
                     return len[cur];
                 }
 
-                // Генерація сусідніх станів
                 for (int di = -1; di <= 1; di++)
                 {
                     for (int dj = -1; dj <= 1; dj++)
@@ -75,7 +64,7 @@ namespace ClassLibrary_Lab5
                 }
             }
 
-            return -1; // Якщо шлях не знайдено
+            return -1; 
         }
     }
 
