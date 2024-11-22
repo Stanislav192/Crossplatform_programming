@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -17,11 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Xunit" />
+    <ProjectReference Include="..\ClassLibrary_Lab3\ClassLibrary_Lab3.csproj" />
   </ItemGroup>
 
+	
   <ItemGroup>
-    <ProjectReference Include="..\Lab3\Lab3.csproj" />
+    <Using Include="Xunit" />
   </ItemGroup>
 
 </Project>
