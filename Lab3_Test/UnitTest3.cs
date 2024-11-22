@@ -1,10 +1,9 @@
-using Lab3;
+using ClassLibrary_Lab3;
 
 namespace Lab3_Test
 {
     public class UnitTest3
     {
-        //Test State Creation from Inputs
         [Fact]
         public void Test_Read_ValidInput()
         {
@@ -27,7 +26,6 @@ namespace Lab3_Test
             }
         }
 
-        // Test Deep Copy
         [Fact]
         public void Test_DeepCopy()
         {
@@ -49,7 +47,6 @@ namespace Lab3_Test
             }
         }
 
-        //Test Equality Method
         [Fact]
         public void Test_Equals_SameState()
         {
@@ -77,7 +74,6 @@ namespace Lab3_Test
             Console.WriteLine("Test is passed.");
         }
 
-        //Test Shift Method with Out of Bounds Move
         [Fact]
         public void Test_Shift_OutOfBoundsMove()
         {
